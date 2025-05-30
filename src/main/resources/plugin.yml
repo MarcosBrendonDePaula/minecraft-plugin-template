@@ -1,0 +1,10 @@
+name: ${plugin.name}
+version: ${plugin.version}
+main: ${plugin.main}
+api-version: 1.20
+description: ${plugin.description}
+commands:
+  example:
+    description: Exemplo de comando
+    usage: /example
+    aliases: [ex]

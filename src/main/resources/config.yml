@@ -1,0 +1,28 @@
+# default config.yml for Example Plugin
+# Configurações gerais do plugin
+settings:
+  # Habilitar mensagens de debug
+  debug: false
+  # Prefixo das mensagens do plugin
+  prefix: "&6[Example] &r"
+
+# Configurações de mensagens
+messages:
+  welcome: "&eBem-vindo ao servidor! Este é um plugin de exemplo."
+  command-success: "&aSeu comando foi executado com sucesso!"
+  command-error: "&cOcorreu um erro ao executar o comando."
+  
+# Exemplo de lista de itens
+items:
+  - "item1"
+  - "item2"
+  - "item3"
+
+# Exemplo de configuração de recursos
+features:
+  feature1:
+    enabled: true
+    cooldown: 60
+  feature2:
+    enabled: false
+    cooldown: 30
