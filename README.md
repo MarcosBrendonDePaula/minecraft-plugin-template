@@ -1,13 +1,17 @@
 # Template de Plugin para Minecraft 1.20.1
 
-Este é um template para desenvolvimento rápido de plugins para servidores Minecraft 1.20.1 usando Spigot/Paper API.
+Este é um template completo para desenvolvimento rápido de plugins para servidores Minecraft 1.20.1 usando Spigot/Paper API.
 
 ## Características
 
 - Estrutura Maven pronta para uso
 - Configuração Java 17
-- Exemplos de comandos, eventos e armazenamento de dados
-- Gerenciamento de configurações personalizadas
+- Exemplos didáticos para desenvolvedores iniciantes:
+  - Comandos simples e avançados com autocompletar
+  - Interfaces gráficas (GUIs) e menus interativos
+  - Sistema de eventos completo
+  - Utilitários para tarefas comuns
+  - Gerenciamento de configurações e dados de jogadores
 - Documentação detalhada com comentários
 - Compatível com Minecraft 1.20.1
 
@@ -62,7 +66,15 @@ Coloque o arquivo JAR na pasta `plugins` do seu servidor Minecraft e reinicie o 
 ```
 src/main/java/com/example/minecraft/
 ├── ExamplePlugin.java       # Classe principal do plugin
-└── ExampleCommand.java      # Exemplo de implementação de comando
+├── ExampleCommand.java      # Exemplo de comando simples
+├── commands/
+│   └── AdvancedCommand.java # Exemplo de comando avançado com subcomandos
+├── events/
+│   └── EventsManager.java   # Gerenciador de eventos do plugin
+├── gui/
+│   └── MenuManager.java     # Sistema de menus e interfaces gráficas
+└── utils/
+    └── PluginUtils.java     # Utilitários para tarefas comuns
 
 src/main/resources/
 ├── plugin.yml               # Configuração do plugin
@@ -72,26 +84,31 @@ src/main/resources/
 ## Exemplos Incluídos
 
 ### Comandos
-O template inclui um exemplo de comando `/example` que demonstra:
-- Verificação de permissões
-- Processamento de argumentos
-- Armazenamento de dados do jogador
+O template inclui exemplos de:
+- Comando simples (`/example`) - Demonstra comandos básicos
+- Comando avançado (`/advanced`) - Demonstra subcomandos, autocompletar e armazenamento de dados
+
+### Interfaces Gráficas
+O template inclui um sistema completo de menus com:
+- Menu principal com navegação
+- Submenus interativos
+- Sistema de registro de cliques
+- Criação de itens personalizados
 
 ### Eventos
-O template inclui um exemplo de manipulação do evento `PlayerJoinEvent` que demonstra:
-- Envio de mensagens ao jogador
-- Agendamento de tarefas
+O template inclui exemplos de manipulação de eventos:
+- Eventos de jogador (entrada, saída)
+- Eventos de interação (cliques, quebra de blocos)
+- Eventos de combate
+- Armazenamento e carregamento de dados de jogadores
 
-### Configuração
-O template inclui exemplos de:
-- Configuração padrão (config.yml)
-- Configuração personalizada (custom.yml)
-- Carregamento e salvamento de configurações
-
-### Armazenamento de Dados
-O template inclui exemplos de:
-- Armazenamento em memória usando `HashMap`
-- Persistência de dados em arquivos YAML
+### Utilitários
+O template inclui métodos utilitários para:
+- Criação de itens personalizados
+- Efeitos de partículas e sons
+- Verificação de permissões
+- Formatação de mensagens
+- Manipulação de localização
 
 ## Personalização Avançada
 
@@ -137,12 +154,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
     
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -152,7 +170,7 @@ jobs:
       run: mvn -B package --file pom.xml
       
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Plugin
         path: target/*.jar

@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
- * Exemplo de classe de comando para o plugin
+ * Exemplo de classe de comando simples para o plugin
  * Demonstra como implementar comandos básicos
  */
 public class ExampleCommand implements CommandExecutor {
@@ -29,16 +29,33 @@ public class ExampleCommand implements CommandExecutor {
 
         // Exemplo de processamento de argumentos
         if (args.length < 1) {
-            player.sendMessage("§6[Exemplo] §eUso: /example <texto>");
+            // Abrir menu principal se não houver argumentos
+            plugin.getMenuManager().openMainMenu(player);
             return true;
         }
 
-        // Exemplo de armazenamento de dados
-        String data = String.join(" ", args);
-        plugin.setPlayerData(player, data);
+        // Processar subcomandos
+        String subCommand = args[0].toLowerCase();
         
-        // Exemplo de resposta ao jogador
-        player.sendMessage("§6[Exemplo] §aDados armazenados: §f" + data);
+        switch (subCommand) {
+            case "help":
+                player.sendMessage("§6=== Comandos Disponíveis ===");
+                player.sendMessage("§e/example §7- Abre o menu principal");
+                player.sendMessage("§e/example help §7- Mostra esta ajuda");
+                player.sendMessage("§e/example info §7- Mostra informações sobre o plugin");
+                break;
+                
+            case "info":
+                player.sendMessage("§6=== Informações do Plugin ===");
+                player.sendMessage("§eNome: §f" + plugin.getDescription().getName());
+                player.sendMessage("§eVersão: §f" + plugin.getDescription().getVersion());
+                player.sendMessage("§eAutor: §f" + String.join(", ", plugin.getDescription().getAuthors()));
+                break;
+                
+            default:
+                player.sendMessage("§cSubcomando desconhecido. Use /example help para ver os comandos disponíveis.");
+                break;
+        }
         
         return true;
     }

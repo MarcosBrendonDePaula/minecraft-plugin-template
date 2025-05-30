@@ -3,10 +3,12 @@ package com.example.minecraft;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.example.minecraft.commands.AdvancedCommand;
+import com.example.minecraft.events.EventsManager;
+import com.example.minecraft.gui.MenuManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +28,10 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
     // Exemplo de configuração personalizada
     private File customConfigFile;
     private FileConfiguration customConfig;
+    
+    // Gerenciadores de funcionalidades
+    private MenuManager menuManager;
+    private EventsManager eventsManager;
 
     @Override
     public void onEnable() {
@@ -38,11 +44,13 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
         // Carregar configuração personalizada
         loadCustomConfig();
         
-        // Registrar eventos
-        getServer().getPluginManager().registerEvents(this, this);
+        // Inicializar gerenciadores
+        menuManager = new MenuManager(this);
+        eventsManager = new EventsManager(this);
         
         // Registrar comandos
         getCommand("example").setExecutor(new ExampleCommand(this));
+        getCommand("advanced").setExecutor(new AdvancedCommand(this, menuManager));
         
         getLogger().info("Plugin de exemplo ativado com sucesso!");
     }
@@ -114,16 +122,19 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
         return playerData.getOrDefault(player.getUniqueId(), null);
     }
     
-    @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        
-        // Exemplo de mensagem de boas-vindas
-        player.sendMessage("§6Bem-vindo ao servidor! Este é um plugin de exemplo.");
-        
-        // Exemplo de agendamento de tarefa
-        getServer().getScheduler().runTaskLater(this, () -> {
-            player.sendMessage("§eEsta mensagem aparece 2 segundos após você entrar no servidor.");
-        }, 40L); // 40 ticks = 2 segundos
+    /**
+     * Obtém o gerenciador de menus
+     * @return Gerenciador de menus
+     */
+    public MenuManager getMenuManager() {
+        return menuManager;
+    }
+    
+    /**
+     * Obtém o gerenciador de eventos
+     * @return Gerenciador de eventos
+     */
+    public EventsManager getEventsManager() {
+        return eventsManager;
     }
 }
