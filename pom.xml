@@ -4,17 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>${groupId}</groupId>
-    <artifactId>${artifactId}</artifactId>
-    <version>${version}</version>
+    <!-- TODO: Altere estas informações para o seu plugin -->
+    <groupId>com.example.minecraft</groupId>
+    <artifactId>example-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>${plugin.name}</name>
-    <description>${plugin.description}</description>
+    <name>ExamplePlugin</name>
+    <description>Um template de plugin para Minecraft 1.20.1</description>
 
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Propriedades para o plugin.yml -->
+        <plugin.name>${project.name}</plugin.name>
+        <plugin.version>${project.version}</plugin.version>
+        <plugin.main>com.example.minecraft.ExamplePlugin</plugin.main>
+        <plugin.description>${project.description}</plugin.description>
     </properties>
 
     <repositories>
